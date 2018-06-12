@@ -1,0 +1,72 @@
+<style lang='css'>
+  @import '/zanui/panel.wxss';
+  @import '/zanui/btn.wxss';
+</style>
+
+<template>
+  <view class="zan-panel-title">武汉大学学生会第三十六届第二任期报名</view>
+  <view class="zan-panel-title">武汉大学学生会第三十六届第二任期报名</view>
+  <view class="zan-panel">
+    <zanField1 :options="base_name" :value="value" componentId="zanField1"></zanField1>
+    <zanField2 :options="base_tel" :value="value" componentId="zanField2"></zanField2>
+    <zanField3 :options="base_address" :value="value" componentId="zanField3"></zanField3>
+    <button class="zan-btn zan-btn--primary">确认付款</button>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import zanField from '../components/zan-field'
+
+export default class registrationPage extends wepy.page {
+  config = {
+    navigationBarTitleText: '报名'
+  }
+
+  components = {
+    zanField1: zanField,
+    zanField2: zanField,
+    zanField3: zanField,
+    zanField4: zanField,
+    zanField5: zanField,
+    zanField6: zanField,
+    zanField7: zanField,
+    zanField8: zanField,
+    zanField9: zanField,
+  }
+
+  data = {
+    // 基础类型输入框配置
+    base_name: {
+      title: '收货人',
+      placeholder: '名字'
+    },
+    base_tel: {
+      error: true,
+      title: '联系电话',
+      inputType: 'number',
+      placeholder: '请输入手机号'
+    },
+    base_address: {
+      title: '详细地址',
+      type: 'textarea',
+      placeholder: '请输入详细地址'
+    },
+  }
+
+  onLoad() {
+    console.log('sss');
+    wx.login({
+      success: function(res) {
+        if (res.code) {
+          //发起网络请求
+          console.log(res)
+
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    });
+  }
+}
+</script>
